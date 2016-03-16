@@ -1,4 +1,4 @@
-from Game import Game
+from GameModule import Game
 
 game = Game()
 game.run()

@@ -1,5 +1,5 @@
-from Player import Player
-from Grid import Grid
+from PlayerModule import Player
+from GridModule import Grid
 
 class Game(object):
 	#This is main class
