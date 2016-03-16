@@ -1,11 +1,13 @@
 class Player(object):
-	name = ""
 
 	def __init__(self, name):
-		self.setName(name)
+		self.set_name(name)
 
-	def getName(self):
-		return name
+	def __repr__(self):
+		return self.name
 
-	def setName(self, name):
+	def set_name(self, name):
 		self.name = name
+
+	def get_prompt(self):
+		return self.name + "> "
