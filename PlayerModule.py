@@ -11,3 +11,9 @@ class Player(object):
 
 	def get_prompt(self):
 		return self.name + "> "
+
+	def set_weapon(self, weapon):
+		self.weapon = weapon
+
+	def get_weapon(self):
+		return self.weapon

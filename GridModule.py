@@ -30,6 +30,7 @@ class Grid(object):
 		self.input_to_box["20"] = self.boxes[2][0]
 		self.input_to_box["21"] = self.boxes[2][1]
 		self.input_to_box["22"] = self.boxes[2][2]
+		self.available_boxes = self.input_to_box.copy()
 
 	def get_input(self, turn):
 		#Get user input for proceeding in the game.
@@ -41,12 +42,12 @@ class Grid(object):
 			if self.is_valid_input(current_input):
 				#if box is empty, set input_validity "True" and return input
 				current_box = self.input_to_box[current_input]
-				print "current box is: ", current_box
 				if current_box.is_empty():
-					print "Valid box."
 					current_box.set_filled()
+					current_box.set_value(turn.get_weapon())
 					input_validity = True
-					return current_box
+					self.available_boxes.pop(current_input)
+					#return current_box
 				else:
 					print "Box is filled."
 			else:
@@ -61,7 +62,38 @@ class Grid(object):
 					result = True
 		return result
 
+	def row_complete(self):
+		for i in range(3):
+			if self.boxes[i][0].get_value() == self.boxes[i][1].get_value()\
+			 and self.boxes[i][1].get_value() == self.boxes[i][2].get_value():
+				return True
+		else:
+			return False
 
+	def column_complete(self):
+		for j in range(3):
+			if self.boxes[0][j].get_value() == self.boxes[1][j].get_value()\
+			 and self.boxes[1][j].get_value() == self.boxes[2][j].get_value():
+				return True
+		else:
+			return False
+
+	def diagonal_complete(self):
+		if self.boxes[0][0].get_value() == self.boxes[1][1].get_value()\
+		 and self.boxes[1][1].get_value() == self.boxes[2][2].get_value():
+			return True
+		elif self.boxes[2][0].get_value() == self.boxes[1][1].get_value()\
+		 and self.boxes[1][1].get_value() == self.boxes[0][2].get_value():
+			return True
+		else:
+			return False
+
+
+	def filled(self):
+		if not self.available_boxes:
+			return True
+		else:
+			return False
 
 
 #The grid consists of these Boxes
@@ -77,12 +109,7 @@ class Box(object):
 	def __repr__(self):
 		return self.value
 
-
-	# String representation of Box;
-	# Since __repr__ is already defined,
-	# we don't explicitely need to define this method.
-	# It will just override that... Will remove this later..
-	def __str__(self):
+	def get_value(self):
 		return self.value
 
 	def set_value(self, value):
