@@ -98,7 +98,6 @@ class Grid(object):
 
 #The grid consists of these Boxes
 class Box(object):
-	possibleValue = {'X':0, 'O': 1}
 	value = None
 	empty = True
 

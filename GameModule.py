@@ -42,8 +42,14 @@ class Game(object):
 		input = raw_input("Names?> ").upper()
 
 		if input in ["Y", "YES"]:
-			self.player1 = Player(raw_input("Player1 Name> "))
-			self.player2 = Player(raw_input("Player2 Name> "))
+			player1Name = raw_input("Player1 Name> ")
+			if player1Name == "":
+				player1Name = "Player1"
+			self.player1 = Player(player1Name)
+			player2Name = raw_input("Player2 Name> ")
+			if player2Name == "":
+				player2Name = "Player2"
+			self.player2 = Player(player2Name)
 
 		else:
 			if input in ["N", "NO"]:
